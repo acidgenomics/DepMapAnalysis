@@ -1,3 +1,3 @@
 # DepMapAnalysis
 
-Cancer Dependency Map (DepMap) analysis toolkit
+Cancer Dependency Map (DepMap) analysis toolkit.
