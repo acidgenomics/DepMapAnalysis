@@ -36,11 +36,27 @@
         "achilles_common_essentials.csv" = "24613283",
         "achilles_gene_dependency.csv" = "24613298",
         "achilles_gene_effect.csv" = "24613292",
+        ## RNAseq TPM gene expression data for just protein coding genes using
+        ## RSEM. Log2 transformed, using a pseudo-count of 1.
+        ##
+        ## Rows: cell lines (Broad IDs)
+        ## Columns: genes (HGNC symbol and Ensembl ID)
+        ##
+        ## Expression
+        ##
+        ## CCLE expression data is quantified from RNAseq files using the GTEx
+        ## pipelines. A detailed description of the pipelines and tool versions
+        ## can be found here:
+        ## https://github.com/broadinstitute/ccle_processing#rnaseq .
+        ##
+        ## We provide a subset of the data files outputted from this pipeline
+        ## available on FireCloud. These are aligned to hg38.
         "ccle_expression.csv" = "24613325",
+        ## RNAseq TPM gene expression data for all genes using RSEM. Log2
+        ## transformed, using a pseudo-count of 1.
+        "ccle_expression_full.csv" = "24613349",
         "ccle_gene_cn.csv" = "24613352",
         "ccle_mutations.csv" = "24613355",
-        "ccle_rnaseq_reads.csv" = "24613361",
-        "ccle_rnaseq_transcripts.csv" = "24613373",
         ## List of genes used as positive controls, intersection of Biomen
         ## (2014) and Hart (2015) essentials in the format "HUGO (Entrez)". Each
         ## entry is separated by a newline.The scores of these genes are used as
