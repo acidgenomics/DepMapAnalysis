@@ -22,7 +22,7 @@
 #' @seealso https://depmap.org/portal/download/
 .depmap <- list(
     "url_stem" = "https://ndownloader.figshare.com/files/",
-    ## CRISPR screens.
+    ## Releases:
     "20q3" = list(
         ## List of genes identified as dependencies in all lines, one per line.
         "achilles_common_essentials.csv" = "24613283",
@@ -31,6 +31,8 @@
         "ccle_expression.csv" = "24613325",
         "ccle_gene_cn.csv" = "24613352",
         "ccle_mutations.csv" = "24613355",
+        "ccle_rnaseq_reads.csv" = "24613361",
+        "ccle_rnaseq_transcripts.csv" = "24613373",
         ## List of genes used as positive controls, intersection of Biomen
         ## (2014) and Hart (2015) essentials in the format "HUGO (Entrez)". Each
         ## entry is separated by a newline.The scores of these genes are used as
@@ -41,7 +43,6 @@
         "nonessentials.csv" = "24613388",
         "sample_info.csv" = "24613394"
     ),
-    ## RNAi screens.
     "demeter2_data_v6" = list(
         "d2_combined_gene_dep_scores.csv" = "13515395",
         "sample_info.csv" = "11489717"
