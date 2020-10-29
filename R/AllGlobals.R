@@ -1,3 +1,11 @@
+## CCLE RSEM TPM files:
+## https://data.broadinstitute.org/ccle/
+##     CCLE_RNAseq_rsem_genes_tpm_20180929.txt.gz
+## https://data.broadinstitute.org/ccle/
+##     CCLE_RNAseq_rsem_transcripts_tpm_20180929.txt.gz
+
+
+
 #' Current DepMap (quarterly) release
 #'
 #' @note Updated 2020-09-30.
