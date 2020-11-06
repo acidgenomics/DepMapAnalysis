@@ -1,8 +1,8 @@
 Package: DepMapAnalysis
 Title: DepMap Analysis Utilities
 Description: Cancer Dependency Map (DepMap) analysis toolkit.
-Version: 0.0.3
-Date: 2020-10-07
+Version: 0.0.4
+Date: 2020-11-06
 Authors@R: c(
     person(
         given = "Michael",
@@ -24,13 +24,13 @@ Encoding: UTF-8
 LazyData: false
 Depends:
     R (>= 4.0),
-    basejump (>= 0.13.1)
+    basejump (>= 0.13.2)
 Imports:
     S4Vectors,
     SummarizedExperiment,
-    cli (>= 2.0),
+    cli,
     ggplot2,
-    goalie (>= 0.4.9),
+    goalie (>= 0.4.11),
     methods,
     rlang,
     stats,
