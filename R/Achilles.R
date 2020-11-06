@@ -59,6 +59,7 @@ Achilles <-  # nolint
             colData <- NULL
         }
         ## Gene metadata.
+        ## FIXME Need to generalize this, so we can use in CCLEExpressionData...
         if (isTRUE(rowRanges)) {
             entrez <- as.integer(str_extract(
                 string = rownames(assays[[1L]]),
@@ -119,19 +120,24 @@ Achilles <-  # nolint
         } else {
             rowRanges <- NULL
         }
+        ## FIXME NEED TO GENERALIZE THIS TOO?
         commonEssentials <-
             .importCommonEssentials(release = release)
         controlCommonEssentials <-
             .importControlCommonEssentials(release = release)
         controlNonessentials <-
             .importControlNonessentials(release = release)
+        ## FIXME RENAME commonEssentials to "commonEssentialGenes", etc.
+        ## FIXME CONSIDER PUTTING IN "genes" and "cells" sublist.
         metadata <- list(
-            version = .version,
-            release = release,
-            commonEssentials = commonEssentials,
-            controlCommonEssentials = controlCommonEssentials,
-            controlNonessentials = controlNonessentials,
-            retired = retired
+            "version" = .version,
+            "release" = release,
+            "genes" = list(
+                "commonEssentials" = commonEssentials,
+                "controlCommonEssentials" = controlCommonEssentials,
+                "controlNonessentials" = controlNonessentials,
+                "retired" = retired
+            )
         )
         metadata <- Filter(Negate(is.null), metadata)
         args <- list(
