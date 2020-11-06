@@ -37,18 +37,24 @@ setValidity(
         ok <- validateClasses(
             object = metadata,
             expected = list(
-                commonEssentials = "character",
-                controlCommonEssentials = "character",
-                controlNonessentials = "character",
-                date = "Date",
-                release = "character",
-                sessionInfo = "session_info",
-                version = "package_version",
-                wd = "character"
+                "genes" = "list",
+                "date" = "Date",
+                "release" = "character",
+                "sessionInfo" = "session_info",
+                "version" = "package_version",
+                "wd" = "character"
             ),
             subset = TRUE
         )
         if (!isTRUE(ok)) return(ok)
+        ok <- validateClasses(
+            object = metadata[["genes"]],
+            expected = list(
+                "commonEssentials" = "character",
+                "controlCommonEssentials" = "character",
+                "controlNonessentials" = "character",
+            )
+        )
 
         ## Assays --------------------------------------------------------------
         assayNames <- assayNames(object)
@@ -72,7 +78,7 @@ setValidity(
 #' @return `CCLECopyNumberData`.
 setClass(
     Class = "CCLECopyNumberData",
-    contains = "DataFrame"
+    contains = "RangedSummarizedExperiment"
 )
 
 
@@ -85,7 +91,7 @@ setClass(
 #' @return `CCLEExpressionData`.
 setClass(
     Class = "CCLEExpressionData",
-    contains = "DataFrame"
+    contains = "RangedSummarizedExperiment"
 )
 
 
@@ -98,7 +104,7 @@ setClass(
 #' @return `CCLEMutationData`.
 setClass(
     Class = "CCLEMutationData",
-    contains = "DataFrame"
+    contains = "RangedSummarizedExperiment"
 )
 
 
@@ -108,11 +114,11 @@ setClass(
 #' @details
 #' Cells in columns, genes in rows.
 #'
-#' @note Updated 2020-10-01.
+#' @note Updated 2020-10-29.
 #' @export
 #'
 #' @return `DEMETER2`.
 setClass(
     Class = "DEMETER2",
-    contains = "SummarizedExperiment"
+    contains = "RangedSummarizedExperiment"
 )
