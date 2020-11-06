@@ -1,3 +1,7 @@
+## FIXME Need to rework, sharing internal code with CCLEExpressionData.
+
+
+
 #' Import Project Achilles CRISPR gene effect data
 #'
 #' @section Assays:
@@ -10,7 +14,7 @@
 #'   depletion effect using `gene_effect`.
 #'
 #' @export
-#' @note Updated 2020-10-07.
+#' @note Updated 2020-11-06.
 #'
 #' @inheritParams params
 #'
@@ -25,7 +29,7 @@ Achilles <-  # nolint
         rowRanges = TRUE,
         colData = TRUE
     ) {
-        retired <- NULL
+        retired <- character()
         if (is.null(release)) {
             release <- .currentRelease
         }
@@ -120,22 +124,17 @@ Achilles <-  # nolint
         } else {
             rowRanges <- NULL
         }
-        ## FIXME NEED TO GENERALIZE THIS TOO?
-        commonEssentials <-
-            .importCommonEssentials(release = release)
-        controlCommonEssentials <-
-            .importControlCommonEssentials(release = release)
-        controlNonessentials <-
-            .importControlNonessentials(release = release)
-        ## FIXME RENAME commonEssentials to "commonEssentialGenes", etc.
-        ## FIXME CONSIDER PUTTING IN "genes" and "cells" sublist.
+        ## FIXME STANDARDIZE THIS WITH CCLEEXPRESSIONDATA.
         metadata <- list(
             "version" = .version,
             "release" = release,
             "genes" = list(
-                "commonEssentials" = commonEssentials,
-                "controlCommonEssentials" = controlCommonEssentials,
-                "controlNonessentials" = controlNonessentials,
+                "commonEssentials" =
+                    .importCommonEssentials(release = release),
+                "controlCommonEssentials" =
+                    .importControlCommonEssentials(release = release),
+                "controlNonessentials" =
+                    .importControlNonessentials(release = release),
                 "retired" = retired
             )
         )

@@ -1,3 +1,9 @@
+## FIXME NEED TO IMPROVE THE METADATA HERE.
+## FIXME NEED TO SLOT THE GENES.
+## FIXME GENES CONTAIN ENTREZ IDS IN THE ROWS.
+
+
+
 #' Import DEMETER2 RNAi screen gene effect data
 #'
 #' @export
