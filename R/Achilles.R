@@ -14,7 +14,7 @@
 #'   depletion effect using `gene_effect`.
 #'
 #' @export
-#' @note Updated 2020-11-06.
+#' @note Updated 2020-11-11.
 #'
 #' @inheritParams params
 #'
@@ -29,7 +29,7 @@ Achilles <-  # nolint
         rowRanges = TRUE,
         colData = TRUE
     ) {
-        retired <- character()
+        retiredGenes <- character()
         if (is.null(release)) {
             release <- .currentRelease
         }
@@ -90,16 +90,16 @@ Achilles <-  # nolint
             drop <- entrez2ensembl[["retired"]]
             if (any(drop)) {
                 keep <- !drop
-                retired <- rownames(assays[[1L]])[drop]
+                retiredGenes <- rownames(assays[[1L]])[drop]
                 cli_alert_warning(sprintf(
                     "Dropping %d retired %s: %s.",
-                    length(retired),
+                    length(retiredGenes),
                     ngettext(
-                        n = length(retired),
+                        n = length(retiredGenes),
                         msg1 = "gene",
                         msg2 = "genes"
                     ),
-                    toString(retired, width = 200L)
+                    toString(retiredGenes, width = 200L)
                 ))
                 entrez2ensembl <- entrez2ensembl[keep, ]
                 assays <- lapply(
@@ -135,7 +135,7 @@ Achilles <-  # nolint
                     .importControlCommonEssentials(release = release),
                 "controlNonessentials" =
                     .importControlNonessentials(release = release),
-                "retired" = retired
+                "retired" = retiredGenes
             )
         )
         metadata <- Filter(Negate(is.null), metadata)

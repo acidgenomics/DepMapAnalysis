@@ -1,9 +1,9 @@
 ## Internal Entrez-to-Ensembl identifier mappings.
 ## Updated 2020-10-02.
 
-library(basejump)        # 0.12.17
+library(basejump)        # 0.13.2
 library(tidyverse)       # 1.3.0
-library(DepMapAnalysis)  # 0.0.1
+library(DepMapAnalysis)  # 0.0.4
 
 organism <- "Homo sapiens"
 
@@ -17,7 +17,11 @@ entrez <- sort(as.integer(str_extract(
 )))
 
 ## There are some Entrez IDs missing in the OrgDb that we need to map.
-## Look up at https://www.ncbi.nlm.nih.gov/gene/
+## Look up at https://www.ncbi.nlm.nih.gov/gene/<ID>
+
+## FIXME: New match failures:
+## 23285, 116093, 338809, 401285, 441509, 646450.
+
 manualEntrez <-
     import("manual-entrez-ids.csv") %>%
     as_tibble() %>%
@@ -30,12 +34,13 @@ manualEntrez <-
 
 ## Skipping the bad keys, let's map primarily using the OrgDb lookup.
 badKeys <- manualEntrez[["entrez"]]
+## If you hit match failure errors here, that is due to Entrez ID deprecations.
+## AH84122 (org.Hs.eg.db.sqlite)
 entrez2ensembl <- Entrez2Ensembl(
     object = setdiff(entrez, badKeys),
     organism = organism,
     format = "1:1"
-) %>%
-    as_tibble(rownames = NULL)
+)
 
 ## As a fall back, get the genomic ranges from Ensembl Ensdb, which also
 ## contains Ensembl-to-Entrez identifier mappings.
@@ -52,8 +57,9 @@ entrez2ensembl <- Entrez2Ensembl(
 ## FALSE
 
 ## Now we're ready to combine the automatic mappings with our manual ones.
-entrez2ensembl <-
-    bind_rows(entrez2ensembl, manualEntrez) %>%
+entrez2ensembl %<>%
+    as_tibble(rownames = NULL) %>%
+    bind_rows(manualEntrez) %>%
     arrange_all() %>%
     as("DataFrame")
 saveData(entrez2ensembl, dir = ".")
